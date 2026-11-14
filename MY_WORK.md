@@ -32,11 +32,11 @@
 
 | Field | Your Answer |
 |-------|-------------|
-| **Full Name** | [Write your full name here] |
-| **Student ID** | [Write your student ID here] |
-| **University Email** | [yourid]@std.psau.edu.sa |
-| **GitHub Username** | [your-github-username] |
-| **Repository Link** | [Paste your repository link here] |
+| **Full Name** | Gala Mohammed Binmanee |
+| **Student ID** | 445052042 |
+| **University Email** | 445052042@std.psau.edu.sa |
+| **GitHub Username** | csgala |
+| **Repository Link** | https://github.com/csgala/OS-Assignment3-Gala-Binmanee |
  
 ---
 
@@ -298,7 +298,7 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+In my run of the original starter with student ID `445052042` (`13` processes, `2` CPUs, `20` expected quanta, `59457ms` expected service time), race conditions on the unprotected ready queue and shared counters caused inconsistent values (`MISMATCH`) and excessive busy-waiting polls instead of clean completion. Without mutual exclusion on the critical section, two threads interleave inside the read-modify-write sequence when updating shared counters like `contextSwitchCount`. On a real multi-core machine, the exact same lost update occurs without `RaceWindow.pause()` whenever the OS scheduler preempts a thread during the nanosecond window between reading a variable from memory and writing back the incremented result. This bug is notoriously difficult to detect in production because that timing window is tiny, causing the code to pass most test runs and fail unpredictably under heavy concurrent load.
 
 Verification block of the **original starter**:
 ```
@@ -307,7 +307,13 @@ Verification block of the **original starter**:
 
 Verification block of **my final version**:
 ```
-[Paste the verification block of your final version here (all lines ✔)]
+??? VERIFICATION (expected values are computed from YOUR seed) ???
+  Context switches (quanta executed)     expected 20       observed 20       ?
+  Completed processes                    expected 13       observed 13       ?
+  Total service time (ms)                expected 59457    observed 59457    ?
+  Busy-waiting polls (must be 0)         expected 0        observed 0        ?
+  ? All shared values are consistent.
+
 ```
 
 **Explanation of the timeline:**
